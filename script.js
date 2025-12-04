@@ -2,7 +2,7 @@
 
 // function for our list view
 async function getAllRecords() {
-  let getResultElement = document.getElementById("brews");
+  let getResultElement = document.getElementById("consoles");
 
   const options = {
     method: "GET",
@@ -10,13 +10,38 @@ async function getAllRecords() {
       Authorization: `Bearer patqFokG70q7pDgwS.0fc5dc294c5f6fae8ffd8d3a67bfe3cfbbe65a0c8b912d655e96751fdd3a3017`,
     },
   };
-  const url =
-    "https://api.airtable.com/v0/appict1RQ6xrDiRP5/Table%201?maxRecords=3&view=Grid%20view";
+  const url = "https://api.airtable.com/v0/appict1RQ6xrDiRP5/Table%201";
 
   await fetch(url, options)
     .then((response) => response.json())
     .then((data) => {
       console.log(data); // response is an object w/ .records array
+
+      getResultElement.innerHTML = ""; // clear consoles
+
+      let newHtml = "";
+
+      for (let i = 0; i < data.records.length; i++) {
+        let image = data.records[i].fields["image"];
+        let name = data.records[i].fields["name"];
+        let company = data.records[i].fields["company"];
+
+        newHtml += `
+        
+        <div class="card" style="width: 18rem">
+          <img src="${image[0].url}" class="card-img-top" alt="${name}" />
+          <div class="card-body">
+            <h5 class="card-title">${name}</h5>
+            <p class="card-text">${company}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+
+
+        `;
+      }
+
+      getResultElement.innerHTML = newHtml;
     });
 }
 
