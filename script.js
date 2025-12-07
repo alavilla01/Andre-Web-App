@@ -33,12 +33,13 @@ async function getAllRecords() {
           <div class="card-body">
             <h5 class="card-title">${name}</h5>
             <p class="card-text">${company}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="details.html" class="btn btn-primary">More Details</a>
           </div>
         </div>
 
 
         `;
+
       }
 
       getResultElement.innerHTML = newHtml;
