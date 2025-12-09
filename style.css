@@ -16,3 +16,11 @@
     "MORF" 15,
     "SHLN" 50;
 }
+
+
+.domine-information {
+  font-family: "Domine", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

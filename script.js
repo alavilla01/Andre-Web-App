@@ -47,3 +47,46 @@ async function getAllRecords() {
 }
 
 getAllRecords();
+
+// function for our detail view
+async function getOneRecord(id) {
+  let resultElement = document.getElementById("consoles");
+
+  const options = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer patqFokG70q7pDgwS.0fc5dc294c5f6fae8ffd8d3a67bfe3cfbbe65a0c8b912d655e96751fdd3a3017`,
+    },
+  };
+
+  await fetch(
+    `https://api.airtable.com/v0/appict1RQ6xrDiRP5/Table%201/${id}`,
+    options
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data); // response is a single object
+
+      let name = data.fields["name"];
+      let company = data.fields["company"];
+      let releaseDate = data.fields["releaseDate"];
+      let description = data.fields["description"];
+      let source = data.fields["source"];
+      let unitsSold = data.fields["unitsSold"];
+      let image = data.fields["image"];
+
+      let newHtml = `
+      
+      <img src="${image}">
+      <h3>Name: ${name}</h3>
+      <p>Company: ${company}</p>
+      <p>Release Date: ${releaseDate}</p>
+      <p>Units Sold: ${unitsSold}</p>
+      <p>Description: ${description}</p>
+      <p>Source: ${source}</p>
+      
+      `;
+
+      resultElement.innerHTML = newHtml;
+    });
+}
