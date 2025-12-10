@@ -28,7 +28,7 @@ async function getAllRecords() {
 
         newHtml += `
         
-        <div class="card" style="width: 18rem">
+        <div class="card domine-information" style="width: 18rem">
           <img src="${image[0].url}" class="card-img-top" alt="${name}" />
           <div class="card-body">
             <h5 class="card-title">${name}</h5>
