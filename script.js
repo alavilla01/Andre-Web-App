@@ -45,7 +45,7 @@ async function getAllRecords() {
     });
 }
 
-getAllRecords();
+// getAllRecords();
 
 // function for our detail view
 async function getOneRecord(id) {
@@ -73,19 +73,51 @@ async function getOneRecord(id) {
       let source = data.fields["source"];
       let unitsSold = data.fields["unitsSold"];
       let image = data.fields["image"];
+      let url = "";
+      if (image && Array.isArray(image)) {
+        url = image[0].url;
+      }
 
       let newHtml = `
       
-      <img src="${image}">
-      <h3>Name: ${name}</h3>
-      <p>Company: ${company}</p>
-      <p>Release Date: ${releaseDate}</p>
-      <p>Units Sold: ${unitsSold}</p>
-      <p>Description: ${description}</p>
-      <p>Source: ${source}</p>
+      <div class="container text-center">
+          <div class="row">
+            <div class="col">
+                <img src="${url}">
+            </div>
+            <div class="col">
+                <h3>Name: ${name}</h3>
+                <p>Company: ${company}</p>
+            </div>
+            <div class="col">
+                <p>Release Date: ${releaseDate}</p>
+                <p>Units Sold: ${unitsSold}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>Description: ${description}</p>
+            </div>
+            <div class="col>
+              <p>Source: ${source}</p>
+            </div>
+          </div>
+      </div>
       
       `;
 
       resultElement.innerHTML = newHtml;
     });
 }
+
+function main() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get("id"); //
+  if (id) {
+    getOneRecord(id);
+  } else {
+    getAllRecords();
+  }
+}
+
+main();
